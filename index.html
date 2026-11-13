@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en" class="js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Thọ's Graduation</title>
+<meta name="description" content="Graduation invitation from Nguyễn Minh Thọ — 6:00 PM, Wednesday 18/11/2026, HCMC University of Industry and Trade.">
+<meta property="og:title" content="Minh Thọ is graduating! 🎓">
+<meta property="og:description" content="You're invited to my graduation — 6:00 PM, Wednesday 18/11/2026.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1f4fa0">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anton&family=Bungee&family=Montserrat:wght@500;700;800;900&family=Oswald:wght@700&family=Playfair+Display:ital,wght@0,900;1,900&family=Sriracha&family=Yeseva+One&display=swap" rel="stylesheet">
+<style>
+/* Màu: phong cách "Đêm đầy sao" — xanh đêm, xanh trời, vàng trăng trên giấy vân nổi.
+   Layout: một tấm thiệp collage Y2K duy nhất chứa đủ thông tin; sticker cắt rời tràn ra mép thiệp.
+   Cố ý chỉ một theme sáng (giấy in). */
+:root{
+  --paper:#e9e7e1;
+  --card:#f4f1ea;
+  --ink:#17233b;
+  --ink-soft:#4a4744;
+  --sea:#1f4fa0;
+  --leaf:#2a5db0;
+  --moon:#e8b923;
+  --silver:#bfc3c8;
+  --note:#fff6c9;
+  --pin:#1f4e9c;
+  --white:#ffffff;
+  --marker:"Sriracha","Comic Sans MS",cursive;
+  --sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --chrome-font:"Bungee","Arial Black",sans-serif;
+  --pop:cubic-bezier(.3,1.5,.5,1);
+  --ease:cubic-bezier(.2,.8,.2,1);
+  /* viền trắng kiểu sticker cắt rời */
+  --diecut:drop-shadow(2.5px 0 0 #fff) drop-shadow(-2.5px 0 0 #fff) drop-shadow(0 2.5px 0 #fff) drop-shadow(0 -2.5px 0 #fff) drop-shadow(0 6px 8px rgba(0,0,0,.28));
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);color:var(--ink);line-height:1.5;
+  background-color:var(--paper);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='1200'%3E%3Cfilter id='p' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.045' numOctaves='5' seed='4' stitchTiles='stitch'/%3E%3CfeDiffuseLighting lighting-color='%23f1efe8' surfaceScale='1.7'%3E%3CfeDistantLight azimuth='45' elevation='58'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+  background-size:1200px 1200px;
+  min-height:100vh;overflow-x:hidden;
+}
+main{overflow-x:clip;position:relative;padding-left:max(14px,env(safe-area-inset-left,0px));padding-right:max(14px,env(safe-area-inset-right,0px));padding-block:56px 40px}
+:focus-visible{outline:2.5px dashed var(--sea);outline-offset:3px}
+
+/* ============ STICKER ============ */
+.stk{position:absolute;filter:var(--diecut);transform:rotate(var(--r,0deg));z-index:2;pointer-events:none}
+.stk svg,.stk img{display:block;width:100%;height:auto}
+.stk.tap{pointer-events:auto;cursor:pointer;transition:scale .25s var(--pop)}
+.stk.tap:hover{scale:1.08}
+.stk.tap:active{scale:.94}
+.js .slap{opacity:0;scale:1.5}
+.js .slap.in{animation:slap .55s var(--pop) var(--d,0s) forwards}
+@keyframes slap{to{opacity:1;scale:1}}
+.bob{animation:bob 4s ease-in-out infinite}
+@keyframes bob{50%{translate:0 -6px}}
+.twk svg{animation:twk 2.8s ease-in-out infinite;animation-delay:var(--t,0s)}
+@keyframes twk{50%{opacity:.7;transform:scale(.86) rotate(10deg)}}
+.tassel{transform-box:view-box;transform-origin:158px 70px;animation:swing 3.2s ease-in-out infinite}
+@keyframes swing{0%,100%{rotate:-7deg}50%{rotate:9deg}}
+
+
+/* ============ TẤM THIỆP ============ */
+.card{
+  position:relative;max-width:540px;margin:0 auto;background:var(--card);
+  padding:30px clamp(18px,5vw,36px) clamp(130px,36vw,150px);text-align:center;
+  box-shadow:0 2px 3px rgba(0,0,0,.08),0 22px 50px rgba(40,30,20,.18);
+}
+.card > :not(.stk):not(.side):not(.paint){position:relative;z-index:3}
+/* nền trời sao vẽ bằng canvas: dải xoáy phía trên + góc dưới phải */
+.paint{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.card{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"msg" "hero" "facts" "bottom"}
+.msg{grid-area:msg}.hero{grid-area:hero}.facts{grid-area:facts}.bottom{grid-area:bottom}
+@media (min-width:900px){
+  main{padding-block:56px 36px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+  .card{width:100%}
+  .card .ransom .r-line:nth-child(n+2){--fs:1.95rem}
+  .card{max-width:920px;padding:44px 48px 120px;column-gap:44px;align-items:center;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"hero msg" "hero facts" "hero bottom"}
+  .msg{margin-top:150px}
+  .facts{margin-top:14px}
+  .bottom{margin-top:18px}
+  .photo-zone{width:250px;margin-top:150px}
+  .star-edge{right:-52px!important;bottom:20%!important}
+}
+
+.msg{font-family:var(--marker);font-size:clamp(1.02rem,4.2vw,1.25rem);line-height:1.38;margin:clamp(128px,38vw,168px) auto 0;max-width:27ch;text-wrap:balance}
+.msg .hi{display:block;color:var(--sea)}
+
+.photo-zone{position:relative;width:min(50vw,240px);margin:calc(min(50vw,240px) * .36) auto 0}
+.photo{display:block;width:100%;height:auto;filter:saturate(.82) sepia(.14) contrast(1.06) var(--diecut)}
+.cap{width:60%;left:52%;margin-left:-30%;top:-25%;--r:-9deg;z-index:4;background:none;border:0;padding:0}
+.photo-zone.no-photo{height:clamp(110px,30vw,150px)}
+.no-photo .cap{width:90%;margin-left:-45%;top:0}
+
+/* tiêu đề cắt chữ báo */
+.ransom{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:4px}
+.r-line{display:flex;flex-wrap:wrap;justify-content:center;column-gap:.3em;row-gap:5px}
+.r-word{display:inline-flex;align-items:center;gap:2px;white-space:nowrap}
+.tile{display:inline-block;line-height:1;padding:.08em .1em .05em;box-shadow:1px 2px 2px rgba(0,0,0,.25);font-size:calc(var(--fs) * var(--k,1))}
+.ransom .r-line:nth-child(1){--fs:clamp(2rem,9.6vw,3rem)}
+.ransom .r-line:nth-child(n+2){--fs:clamp(1.35rem,6.8vw,2.35rem)}
+.js .tile{opacity:0;translate:0 -30px;rotate:calc(var(--rt) * 3)}
+.js .tile.drop{animation:tileIn .5s var(--pop) var(--dl) forwards}
+@keyframes tileIn{to{opacity:1;translate:0 var(--ty);rotate:var(--rt)}}
+.chrome{position:relative;font-family:var(--chrome-font);font-size:calc(var(--fs) * 1.35);line-height:.95;padding:0 .04em;
+  background:linear-gradient(180deg,#fff6cc 0%,#f6d24a 24%,#2f6fd0 48%,#c3dcf7 60%,#1f4fa0 84%,#86b4ef 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:1.5px #13306e;
+  filter:drop-shadow(2px 3px 0 rgba(0,0,0,.25));box-shadow:none}
+.bow{width:clamp(40px,10vw,56px);left:-30%;top:-30%;--r:-18deg;z-index:4}
+.sub{font-weight:700;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:12px}
+
+/* thông tin */
+.facts{margin-top:20px}
+.date{position:relative;display:inline-block;font-weight:800;font-size:clamp(1.4rem,6.4vw,1.95rem);line-height:1.15}
+.date .pin{position:absolute;left:-26px;top:-14px;width:24px;rotate:-20deg;filter:drop-shadow(0 3px 2px rgba(0,0,0,.3))}
+.time{font-weight:800;font-size:clamp(.98rem,4.2vw,1.2rem);letter-spacing:.12em;color:var(--sea);margin-top:2px}
+.where{font-weight:700;font-size:clamp(.92rem,3.9vw,1.05rem);line-height:1.4;margin-top:10px;text-wrap:balance}
+.where small{display:block;font-weight:500;font-size:.88em;color:var(--ink-soft)}
+.after{font-family:var(--marker);font-size:clamp(1rem,4.1vw,1.15rem);line-height:1.35;margin-top:10px;text-wrap:balance}
+.after b{font-family:var(--sans);font-weight:800;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--white);padding:3px 8px;margin-right:6px;vertical-align:2px}
+
+
+.actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+.btn{display:inline-flex;align-items:center;gap:7px;font:800 .74rem var(--sans);letter-spacing:.1em;text-transform:uppercase;
+  padding:10px 15px;border-radius:999px;text-decoration:none;cursor:pointer;border:2px solid var(--ink);color:var(--ink);background:var(--white);
+  box-shadow:3px 3px 0 var(--ink);transition:translate .15s,box-shadow .15s}
+.btn:hover{translate:-1px -1px;box-shadow:4px 4px 0 var(--ink)}
+.btn:active{translate:2px 2px;box-shadow:1px 1px 0 var(--ink)}
+.btn.dark{background:var(--sea);color:var(--white);border-color:var(--ink);box-shadow:3px 3px 0 var(--moon)}
+.btn.dark:hover{box-shadow:4px 4px 0 var(--moon)}
+.btn svg{width:16px;height:16px;flex:none;display:block}
+
+.bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-top:24px;text-align:left}
+.note{position:relative;flex:1 1 auto;max-width:250px;background:var(--note);padding:16px 14px 12px;rotate:-2deg;box-shadow:0 4px 10px rgba(0,0,0,.14);
+  font-family:var(--marker);font-size:clamp(.9rem,3.7vw,1rem);line-height:1.35}
+.note::before{content:"";position:absolute;top:-9px;left:50%;width:70px;height:18px;margin-left:-35px;background:rgba(191,195,200,.78);rotate:3deg}
+.note strong{display:block;color:var(--leaf);font-weight:400;font-size:1.12em}
+.sign{flex:0 0 auto;text-align:right;font-family:var(--marker);line-height:1.15}
+.sign .so{font-size:clamp(.9rem,3.7vw,1.02rem);display:block;max-width:15ch;margin-left:auto}
+.sign .nm{font-size:clamp(1.7rem,7.6vw,2.2rem);color:var(--sea);display:inline-block;rotate:-5deg;margin-top:2px}
+
+/* ============ CÔNG CỤ TẠO LINK (?tool=1) ============ */
+.tool{max-width:540px;margin:40px auto 0;background:var(--white);border:2px dashed var(--ink);border-radius:8px;padding:22px;text-align:left;font-size:.95rem}
+.tool h3{margin-bottom:12px}
+.tool label{display:block;margin:10px 0 4px}
+.tool input[type=text],.tool textarea{width:100%;font:inherit;padding:10px 12px;border:1.5px solid var(--silver);border-radius:6px;background:var(--card);color:var(--ink)}
+.tool textarea{min-height:110px;font-family:ui-monospace,Menlo,monospace;font-size:.82rem}
+.tool .radios{display:flex;gap:18px;flex-wrap:wrap}
+.tool .radios label{display:flex;align-items:center;gap:6px;margin:0}
+.tool .actions{justify-content:flex-start}
+.tool .muted{font-size:.82rem;color:var(--ink-soft);margin-top:6px}
+
+#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:30}
+
+.side{display:none}
+@media (min-width:1000px){ .side{display:block} }
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01s!important}
+  .js .slap,.js .tile{opacity:1;scale:1}
+  .js .tile{translate:0 var(--ty,0);rotate:var(--rt,0deg)}
+}
+</style>
+</head>
+<body>
+
+<!-- Định nghĩa dùng chung cho các sticker SVG -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="glitter" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="1" seed="7" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 14 -8.6" result="hi"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -12 5.2" result="lo"/>
+      <feComposite in="hi" in2="SourceGraphic" operator="in" result="hi2"/>
+      <feComposite in="lo" in2="SourceGraphic" operator="in" result="lo2"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="lo2"/><feMergeNode in="hi2"/></feMerge>
+    </filter>
+    <linearGradient id="chromeG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fdfdfd"/><stop offset=".3" stop-color="#b9bec4"/><stop offset=".5" stop-color="#5f656d"/>
+      <stop offset=".64" stop-color="#eef0f2"/><stop offset="1" stop-color="#868c94"/>
+    </linearGradient>
+    <linearGradient id="capTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4a5564"/><stop offset=".55" stop-color="#2a323d"/><stop offset="1" stop-color="#1a1f26"/>
+    </linearGradient>
+    <linearGradient id="capBase" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1c2129"/><stop offset=".45" stop-color="#3a4452"/><stop offset="1" stop-color="#1a1e25"/>
+    </linearGradient>
+    <linearGradient id="seaG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3f9cc0"/><stop offset=".6" stop-color="#23708f"/><stop offset="1" stop-color="#0f3f55"/>
+    </linearGradient>
+    <path id="starP" d="M50 4l13 30 32 3-24 21 7 32-28-17-28 17 7-32L5 37l32-3Z"/>
+  </defs>
+</svg>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<main>
+  <article class="card">
+    <canvas class="paint" id="paint" aria-hidden="true"></canvas>
+    <!-- ===== sao kim tuyến trên nền trời ===== -->
+    <div class="stk slap twk tap star-tap" style="top:40px;left:46%;width:clamp(40px,11vw,54px);--r:-8deg;--d:.15s;--t:-.4s"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#starP" fill="#7fb6e0" filter="url(#glitter)"/></svg></div>
+    <div class="stk slap twk" style="top:96px;left:18%;width:clamp(30px,8vw,40px);--r:14deg;--d:.2s;--t:-1.2s"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#starP" fill="#1f3f8f" filter="url(#glitter)"/></svg></div>
+    <div class="stk slap twk" style="top:118px;right:12%;width:clamp(28px,7.5vw,36px);--r:-12deg;--d:.25s;--t:-2s"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#starP" fill="#1f3f8f" filter="url(#glitter)"/></svg></div>
+
+    <p class="msg"><span class="hi" id="greet"></span><span id="msgText"></span></p>
+
+    <div class="hero">
+    <!-- ===== ảnh + mũ ===== -->
+    <div class="photo-zone" id="photoZone">
+      <img class="photo slap" id="photo" alt="" hidden>
+      <button class="stk slap tap cap" id="cap" type="button" data-i18n-aria="capAria" style="--d:.2s">
+        <svg viewBox="0 0 200 150" aria-hidden="true">
+          <path d="M48 66v34c0 14 23 26 52 26s52-12 52-26V66l-52 22Z" fill="url(#capBase)" stroke="#12161b" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M100 18 192 54 100 92 8 54Z" fill="url(#capTop)" stroke="#12161b" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M100 26 168 53" stroke="#fff" stroke-width="2" opacity=".18" stroke-linecap="round"/>
+          <circle cx="100" cy="54" r="5" fill="#c9a14a" stroke="#7d6125"/>
+          <path d="M100 54 Q132 60 158 70" stroke="#c9a14a" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <g class="tassel">
+            <path d="M158 70v40" stroke="#c9a14a" stroke-width="3" stroke-linecap="round"/>
+            <path d="M151 108h14l4 30h-22Z" fill="#d6b05a" stroke="#8c6d2a" stroke-width="1.5"/>
+            <path d="M154 114v22M158 114v22M162 114v22" stroke="#8c6d2a" stroke-width="1" opacity=".6"/>
+          </g>
+        </svg>
+      </button>
+      <!-- sao quanh ảnh (bấm được) -->
+      <div class="stk slap twk tap star-tap" style="right:-34%;top:12%;width:clamp(40px,11vw,54px);--r:8deg;--d:.4s;--t:-.5s"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#starP" fill="#3f7fc0" filter="url(#glitter)"/></svg></div>
+      <div class="stk slap twk" style="left:-34%;top:40%;width:clamp(34px,9vw,46px);--r:-16deg;--d:.45s;--t:-1.6s"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#starP" fill="#5a9ad6" filter="url(#glitter)"/></svg></div>
+    </div>
+
+    <h1 class="ransom" id="ransom"></h1>
+    <p class="sub" data-i18n="degree"></p>
+    </div>
+
+    <!-- ===== thông tin ===== -->
+    <div class="facts">
+      <div class="date">
+        <svg class="pin" viewBox="0 0 40 60" aria-hidden="true"><circle cx="20" cy="14" r="12" fill="var(--pin)"/><circle cx="16" cy="10" r="4" fill="#fff" opacity=".45"/><path d="M14 22h12l-2 10h-8Z" fill="#163a75"/><path d="M20 32v26" stroke="#9aa0a7" stroke-width="2.5" stroke-linecap="round"/></svg>
+        <span data-i18n="dateLine"></span>
+      </div>
+      <div class="time" data-i18n="timeLine"></div>
+      <p class="where"><span data-i18n="school"></span><small>140 Lê Trọng Tấn, Tân Phú, TP.HCM</small></p>
+      <p class="after"><b data-i18n="after"></b><span id="afterText"></span></p>
+      <div class="actions" id="actions">
+        <a class="btn dark" id="mapSchool" target="_blank" rel="noopener"><span data-icon="route"></span><span data-i18n="directions"></span></a>
+      </div>
+    </div>
+
+    <!-- ===== lưu ý + ký tên ===== -->
+    <div class="bottom">
+      <div class="note"><strong data-i18n="noteTitle"></strong><span data-i18n="noteText"></span></div>
+      <div class="sign"><span class="so" id="signoff"></span><span class="nm">Minh Thọ</span></div>
+    </div>
+
+    <!-- sao góc dưới -->
+    <div class="stk slap twk" style="left:-22px;bottom:-22px;width:clamp(54px,15vw,72px);--r:-10deg;--d:.2s;--t:-.8s"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#starP" fill="#5a9ad6" filter="url(#glitter)"/></svg></div>
+    <div class="stk slap twk star-edge" style="right:-30px;bottom:38%;width:clamp(40px,11vw,54px);--r:16deg;--d:.3s;--t:-1.4s"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#starP" fill="#3f7fc0" filter="url(#glitter)"/></svg></div>
+    <div class="stk slap twk" style="right:30%;bottom:58px;width:clamp(40px,11vw,52px);--r:12deg;--d:.35s;--t:-.2s"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#starP" fill="#7fb6e0" filter="url(#glitter)"/></svg></div>
+
+    <!-- sao phụ cho màn hình rộng -->
+    <div class="side" aria-hidden="true">
+      <div class="stk slap twk" style="left:-150px;top:30%;width:70px;--r:-12deg;--t:-.6s"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#starP" fill="#3f7fc0" filter="url(#glitter)"/></svg></div>
+      <div class="stk slap twk" style="left:-90px;top:62%;width:44px;--r:10deg;--t:-1.4s"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#starP" fill="#1f3f8f" filter="url(#glitter)"/></svg></div>
+      <div class="stk slap twk" style="right:-140px;top:40%;width:60px;--r:14deg;--t:-2.2s"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#starP" fill="#7fb6e0" filter="url(#glitter)"/></svg></div>
+      <div class="stk slap twk" style="right:-90px;top:72%;width:40px;--r:-8deg;--t:-.9s"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#starP" fill="#5a9ad6" filter="url(#glitter)"/></svg></div>
+    </div>
+  </article>
+
+  <!-- Công cụ tạo link riêng: chỉ hiện khi mở trang với ?tool=1 -->
+  <div class="tool" id="tool" hidden>
+    <h3>Tạo link mời riêng</h3>
+    <label for="tBase">Link trang (dán link share của thiệp vào đây)</label>
+    <input type="text" id="tBase" placeholder="https://claude.ai/…">
+    <label for="tName">Tên người nhận (vd: "Tuấn", "Cô Hai", "Ba Mẹ")</label>
+    <input type="text" id="tName" placeholder="Tuấn" maxlength="40">
+    <label for="tOut">Link</label>
+    <input type="text" id="tOut" readonly>
+    <div class="actions">
+      <button class="btn dark" id="tCopy" type="button">Copy link</button>
+      <a class="btn" id="tOpen" target="_blank" rel="noopener">Xem thử</a>
+    </div>
+    <label for="tBulk" style="margin-top:22px">Tạo nhiều link một lúc (mỗi dòng một tên)</label>
+    <textarea id="tBulk" placeholder="Tuấn&#10;Hùng&#10;Linh"></textarea>
+    <textarea id="tBulkOut" readonly placeholder="Link sẽ hiện ở đây…" style="margin-top:8px" aria-label="Danh sách link"></textarea>
+    <p class="muted">Khách mở link bình thường sẽ không thấy mục này.</p>
+  </div>
+</main>
+
+<script>
+/* =========================================================
+   CHỈNH THÔNG TIN Ở ĐÂY
+   ========================================================= */
+const EVENT = {
+  start: "2026-11-18T18:00:00+07:00",
+  end:   "2026-11-18T21:00:00+07:00",
+  address: "Trường Đại học Công Thương TP.HCM, 140 Lê Trọng Tấn, Tân Phú, TP.HCM",
+};
+
+// Khi chốt quán thì điền vào đây. Để name rỗng = hiện "đang chọn quán".
+const RESTAURANT = {
+  name: "",        // vd: "Quán Nhậu Bờ Kè"
+  address: "248 Đường Tây Thạnh, Tây Thạnh, TP.HCM",
+  mapUrl: "",      // link Google Maps (tùy chọn)
+  time: "",        // vd: "20:00"
+};
+
+// Ảnh hồi bé (đã tách nền) đặt cùng thư mục. Để rỗng = chỉ hiện cái mũ.
+const PHOTO = "photo.png";
+
+/* ---------- Nội dung 2 ngôn ngữ ---------- */
+const TEXT = {
+  en: {
+    greet: n => n ? `Dear ${n},` : "Dear friends,",
+    you: n => n || "you",
+    msg: you => `thank you for being a part of my youth. I'm graduating, and I really hope ${you} can come celebrate with me!`,
+    title: ["MINH THỌ", "IS GRADUATING!"],
+    degree: "Bachelor of Software Engineering",
+    dateLine: "DATE: 18/11/2026",
+    timeLine: "Time: 6:00 PM · Wednesday",
+    school: "HCMC University of Industry and Trade",
+    after: "After",
+    afterPending: "celebration dinner, place coming soon right here",
+    afterSet: (name, addr, time) => `celebration dinner at ${[name, addr].filter(Boolean).join(", ")}${time ? " · " + time : ""}`,
+    left: "In",
+    unitDay: "days",
+    started: "Happening now!",
+    done: "I graduated! Thank you all ♥",
+    directions: "Directions",
+    dirFood: "To dinner",
+    addCal: "Add to calendar",
+    capAria: "Toss the cap",
+    noteTitle: "One small thing!",
+    noteText: "There will be beer, so leave your bike at home and take a Grab.",
+    signoff: you => `See ${you} there!`,
+    calTitle: "Minh Thọ's graduation 🎓",
+    calDetails: "Graduation ceremony + dinner. There will be drinks, so take a Grab!",
+    docTitle: n => n ? `For ${n} · Thọ's Graduation` : "Thọ's Graduation",
+  },
+};
+
+const ICON = {
+  route:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h7a3.5 3.5 0 0 0 0-7H9a3.5 3.5 0 0 1 0-7h7"/></svg>',
+  cal:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>',
+  food:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8M4.5 3v5a2.5 2.5 0 0 0 5 0V3M7 11v10M17 21V3c-2.5 1.5-3.5 4-3.5 7.5V13H17"/></svg>',
+};
+
+/* =========================================================
+   LOGIC
+   ========================================================= */
+const $ = id => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+/* Tên khách: ?to=Tên (link cũ) hoặc #Ten-Khach / #inv-<hex UTF-8> (dùng được cả khi host trên claude.ai, nơi chỉ giữ lại #hash) */
+const HASH = location.hash.slice(1);
+const nameFromHash = h => {
+  if (!h || h === "tool") return "";
+  const m = /^inv-((?:[0-9a-f]{2})+)$/i.exec(h);
+  if (m) { try { return new TextDecoder("utf-8", { fatal: true }).decode(new Uint8Array(m[1].match(/../g).map(b => parseInt(b, 16)))); } catch (e) { return ""; } }
+  try { h = decodeURIComponent(h); } catch (e) {}
+  return h.replace(/[-_]+/g, " ");
+};
+const nameToHash = n => /^[A-Za-z0-9 ]+$/.test(n) ? n.trim().replace(/\s+/g, "-")
+  : "inv-" + [...new TextEncoder().encode(n)].map(b => b.toString(16).padStart(2, "0")).join("");
+const rawName = (params.get("to") || nameFromHash(HASH) || "").trim().slice(0, 40);
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let lang = "en";
+
+document.querySelectorAll("[data-icon]").forEach(el => el.innerHTML = ICON[el.dataset.icon]);
+if (PHOTO) { const p = $("photo"); p.src = PHOTO; p.alt = "Minh Thọ hồi bé"; p.hidden = false; }
+else $("photoZone").classList.add("no-photo");
+
+/* ---------- Chữ cắt báo (ransom note) ---------- */
+const TILE_STYLES = [
+  { f: '"Anton",Impact,sans-serif',                 bg: "#13306e", c: "#f4f1ea" },
+  { f: '"Playfair Display",Georgia,serif',  w: 900, bg: "#ffffff", c: "#17233b" },
+  { f: '"Alfa Slab One",Georgia,serif',             bg: "#f6d24a", c: "#13306e" },
+  { f: '"Bungee","Arial Black",sans-serif',          bg: "#2f6fd0", c: "#ffffff", k: .82 },
+  { f: '"Oswald",Impact,sans-serif',        w: 700, bg: "#e6edf7", c: "#17233b" },
+  { f: '"Yeseva One",Georgia,serif',                bg: "#1f4fa0", c: "#fff6cc", lower: true },
+  { f: '"Montserrat",sans-serif',           w: 900, bg: "#c3dcf7", c: "#13306e", k: .86 },
+  { f: '"Playfair Display",Georgia,serif',  w: 900, bg: "#f3ead2", c: "#1f4fa0", it: true, lower: true },
+];
+const rnd = i => { const x = Math.sin(i * 12.9898 + 78.233) * 43758.5453; return x - Math.floor(x); };
+const BOW_SVG = '<svg viewBox="0 0 100 100"><use href="#starP" fill="#f6d24a" stroke="#c4952a" stroke-width="3" stroke-linejoin="round" filter="url(#glitter)"/></svg>';
+
+function ransom(container, lines, seed){
+  container.textContent = "";
+  let idx = 0;
+  lines.forEach(line => {
+    const ln = document.createElement("span"); ln.className = "r-line";
+    line.split(" ").forEach(word => {
+      const w = document.createElement("span"); w.className = "r-word";
+      [...word].forEach(ch => {
+        const i = seed + idx;
+        const t = document.createElement("span");
+        if (idx === 0) {
+          t.className = "tile chrome"; t.textContent = ch;
+          const bow = document.createElement("span"); bow.className = "stk bow"; bow.innerHTML = BOW_SVG; t.append(bow);
+        } else {
+          const s = TILE_STYLES[Math.floor(rnd(i) * TILE_STYLES.length)];
+          t.className = "tile";
+          t.textContent = s.lower ? ch.toLocaleLowerCase("vi") : ch;
+          t.style.cssText = `font-family:${s.f};font-weight:${s.w || 400};font-style:${s.it ? "italic" : "normal"};background:${s.bg};color:${s.c};--k:${(s.k || 1) * (0.86 + rnd(i + 99) * 0.28)}`;
+        }
+        t.style.setProperty("--rt", `${(rnd(i + 7) - .5) * 14}deg`);
+        t.style.setProperty("--ty", `${(rnd(i + 31) - .5) * 8}px`);
+        t.style.setProperty("--dl", `${idx * 50}ms`);
+        t.setAttribute("aria-hidden", "true");
+        w.append(t); idx++;
+      });
+      ln.append(w);
+    });
+    container.append(ln);
+  });
+  const sr = document.createElement("span"); sr.textContent = lines.join(" ");
+  sr.style.cssText = "position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)";
+  container.append(sr);
+  requestAnimationFrame(() => container.querySelectorAll(".tile").forEach(t => t.classList.add("drop")));
+}
+
+function applyLang(next){
+  lang = next; const T = TEXT[lang]; const you = T.you(rawName);
+  document.documentElement.lang = lang;
+  document.title = T.docTitle(rawName);
+  document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = T[el.dataset.i18n]);
+  document.querySelectorAll("[data-i18n-aria]").forEach(el => el.setAttribute("aria-label", T[el.dataset.i18nAria]));
+  $("greet").textContent = T.greet(rawName);          // textContent: tên trong URL không chèn được HTML
+  $("msgText").textContent = T.msg(you);
+  $("signoff").textContent = T.signoff(you);
+  $("afterText").textContent = (RESTAURANT.name || RESTAURANT.address) ? T.afterSet(RESTAURANT.name, RESTAURANT.address, RESTAURANT.time) : T.afterPending;
+  ransom($("ransom"), T.title, 3);
+
+  // nút chỉ đường tới quán (chỉ khi đã chốt quán)
+  document.querySelectorAll(".btn-food").forEach(b => b.remove());
+  if (RESTAURANT.name || RESTAURANT.address) {
+    const a = document.createElement("a"); a.className = "btn btn-food"; a.target = "_blank"; a.rel = "noopener";
+    a.href = RESTAURANT.mapUrl || ("https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent([RESTAURANT.name, RESTAURANT.address].filter(Boolean).join(" ")));
+    a.innerHTML = ICON.food; const s = document.createElement("span"); s.textContent = T.dirFood; a.append(s);
+    $("actions").append(a);
+  }
+  $("mapSchool").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(EVENT.address);
+}
+
+applyLang(lang);
+
+/* ---------- Laptop: thu nhỏ tấm thiệp cho vừa chiều cao màn hình ---------- */
+const card = document.querySelector(".card");
+function fit(){
+  card.style.zoom = "";
+  if (innerWidth < 900) return;
+  const h = card.getBoundingClientRect().height;
+  const avail = innerHeight - 92;               // chừa chỗ cho sticker tràn ra trên/dưới
+  const z = Math.max(.68, Math.min(1, avail / h));
+  if (z < 1) card.style.zoom = z;
+}
+/* ---------- Vẽ nền "Đêm đầy sao": nét cọ xoáy theo trường dòng chảy ---------- */
+function paintSky(){
+  const cv = $("paint"), W = card.offsetWidth, H = card.offsetHeight;
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  const c = cv.getContext("2d"); c.setTransform(dpr, 0, 0, dpr, 0, 0); c.lineCap = "round"; c.lineJoin = "round";
+  let seed = 11; const rand = () => (seed = seed * 16807 % 2147483647) / 2147483647;
+  const pick = a => a[(rand() * a.length) | 0];
+
+  const base = Math.max(110, Math.min(190, .36 * Math.min(W, 560)));
+  const topEdge = x => base * (1 - .36 * x / W) + 12 * Math.sin(x / 34) + 7 * Math.sin(x / 13 + 1);
+  const cr = { rx: Math.min(W * .5, 320), ry: Math.min(H * .15, 120) };
+  const inCorner = (x, y) => ((x - W) / cr.rx) ** 2 + ((y - H) / cr.ry) ** 2;
+  const moons = [
+    { x: W * .1,  y: base * .12, r: base * .34 },
+    { x: W * .84, y: base * .08, r: base * .4 },
+    { x: W * .78, y: H - cr.ry * .35, r: cr.ry * .38 },
+  ];
+  const vort = [
+    { x: W * .32, y: base * .55, s: 1, R: base * .45 }, { x: W * .6, y: base * .42, s: -1, R: base * .4 },
+    { x: W * .06, y: base * 1.0, s: 1, R: base * .4 },  { x: W * .92, y: base * .62, s: -1, R: base * .35 },
+    { x: W * .9, y: H - cr.ry * .55, s: 1, R: cr.ry * .6 },
+    ...moons.map(m => ({ x: m.x, y: m.y, s: 1, R: m.r * 1.3 })),
+  ];
+  const flow = (x, y) => {
+    let vx = 1, vy = .12;
+    for (const v of vort) {
+      const dx = x - v.x, dy = y - v.y, d = Math.hypot(dx, dy) + 1, w = Math.exp(-d / v.R) * 3.2;
+      vx += -dy / d * v.s * w; vy += dx / d * v.s * w;
+    }
+    const n = Math.hypot(vx, vy); return [vx / n, vy / n];
+  };
+  const BLUES = ["#13306e", "#1f4fa0", "#2f6fd0", "#2f6fd0", "#4f8fe0", "#86b4ef", "#c3dcf7", "#ffffff"];
+  const DEEP  = ["#0f2752", "#1d3f7a", "#2c5c96", "#3d7fae", "#7fa8c9", "#c9b45a"];
+  const YELL  = ["#f6d24a", "#f9e48c", "#fff4c2", "#e8b923"];
+  const nearMoon = (x, y) => moons.some(m => Math.hypot(x - m.x, y - m.y) < m.r * 1.05);
+
+  function strokes(count, inside, palette){
+    for (let i = 0; i < count; i++) {
+      let x = rand() * W, y = rand() * H;
+      if (!inside(x, y)) continue;
+      const col = nearMoon(x, y) ? pick(YELL) : pick(palette);
+      c.strokeStyle = col; c.globalAlpha = .8 + rand() * .2; c.lineWidth = 2 + rand() * 2.8;
+      c.beginPath(); c.moveTo(x, y);
+      const steps = 6 + (rand() * 7 | 0);
+      for (let k = 0; k < steps; k++) { const [fx, fy] = flow(x, y); x += fx * 3.2; y += fy * 3.2; c.lineTo(x, y); }
+      c.stroke();
+    }
+  }
+  const inTop = (x, y) => y < topEdge(x) + (rand() - .5) * 34;
+  const inBR  = (x, y) => inCorner(x, y) < 1 - rand() * .25;
+  // nền xanh, rồi lớp sáng phía trên
+  strokes(W * base * .9 / 4, inTop, ["#13306e", "#1f4fa0", "#1f4fa0", "#2f6fd0"]);   // lớp nền đậm
+  strokes(W * base * .9 / 4.5, inTop, BLUES);                                      // lớp sáng
+  strokes(cr.rx * cr.ry * 1.6 / 4, inBR, DEEP);
+  // quầng trăng: vòng tròn đồng tâm màu vàng
+  for (const m of moons) {
+    for (let r = 3; r < m.r; r += 2.6) {
+      const segs = 6 + (r / 3 | 0);
+      for (let k = 0; k < segs; k++) {
+        const a0 = rand() * Math.PI * 2, a1 = a0 + .25 + rand() * .5;
+        c.strokeStyle = r < m.r * .55 ? pick(YELL) : pick(["#f9e48c", "#fff4c2", "#c3dcf7", "#ffffff"]);
+        c.globalAlpha = .9; c.lineWidth = 1.6 + rand() * 2;
+        c.beginPath(); c.arc(m.x, m.y, r, a0, a1); c.stroke();
+      }
+    }
+  }
+  c.globalAlpha = 1;
+}
+let paintTimer;
+const repaint = () => { clearTimeout(paintTimer); paintTimer = setTimeout(paintSky, 120); };
+paintSky();
+fit();
+addEventListener("resize", () => { fit(); repaint(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { fit(); paintSky(); });
+setTimeout(() => { fit(); paintSky(); }, 600);   // sau khi chữ cắt báo render xong
+
+
+/* ---------- Sticker "dán" vào ---------- */
+const slaps = document.querySelectorAll(".slap");
+if ("IntersectionObserver" in window && !reduce) {
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; e.target.classList.add("in"); io.unobserve(e.target);
+  }), { threshold: .1 });
+  slaps.forEach(el => io.observe(el));
+} else slaps.forEach(el => el.classList.add("in"));
+
+/* ---------- Sao bay ---------- */
+const confetti = (() => {
+  const cv = $("confetti"), ctx = cv.getContext("2d");
+  const colors = ["#13306e", "#1f4fa0", "#2f6fd0", "#86b4ef", "#c3dcf7", "#f6d24a", "#fff4c2"];
+  let parts = [], raf = 0, dpr = 1;
+  const size = () => { dpr = Math.min(devicePixelRatio || 1, 2); cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; };
+  size(); addEventListener("resize", size);
+  const star = r => { ctx.beginPath(); for (let k = 0; k < 10; k++) { const a = k * Math.PI / 5 - Math.PI / 2, rr = k % 2 ? r * .45 : r; ctx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); } ctx.closePath(); ctx.fill(); };
+  function frame(){
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    parts = parts.filter(p => p.life > 0 && p.y < innerHeight + 40);
+    for (const p of parts) {
+      p.vy += .11; p.vx += Math.sin(p.flip * .6) * .08; p.vx *= .985; p.vy *= .985; p.x += p.vx; p.y += p.vy; p.rot += p.vr; p.life--; p.flip += .12;
+      ctx.save(); ctx.translate(p.x * dpr, p.y * dpr); ctx.rotate(p.rot); ctx.scale(1, Math.cos(p.flip));
+      ctx.globalAlpha = Math.min(1, p.life / 40); ctx.fillStyle = p.c;
+      if (p.kind === 0) { ctx.beginPath(); ctx.arc(0, 0, p.h * dpr * .7, 0, 7); ctx.fill(); } else star(p.w * dpr * .75);
+      ctx.restore();
+    }
+    raf = parts.length ? requestAnimationFrame(frame) : 0;
+  }
+  return (x, y, n = 70) => {
+    if (reduce) return;
+    for (let i = 0; i < n; i++) {
+      const a = -Math.PI / 2 + (Math.random() - .5) * 2, sp = 5 + Math.random() * 7;
+      parts.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, w: 6 + Math.random() * 6, h: 3 + Math.random() * 4,
+        rot: Math.random() * 6, vr: (Math.random() - .5) * .3, flip: Math.random() * 6, life: 110 + Math.random() * 60,
+        c: colors[(Math.random() * colors.length) | 0], kind: Math.random() < .3 ? 0 : 1 });
+    }
+    if (!raf) raf = requestAnimationFrame(frame);
+  };
+})();
+const burstFrom = el => { const r = el.getBoundingClientRect(); confetti(r.left + r.width / 2, r.top + r.height / 2); };
+$("cap").addEventListener("click", () => burstFrom($("cap")));
+document.querySelectorAll(".star-tap").forEach(s => s.addEventListener("click", () => burstFrom(s)));
+if (!reduce) setTimeout(() => { const r = $("ransom").getBoundingClientRect(); if (r.top < innerHeight) confetti(innerWidth / 2, r.top, 50); }, 1300);
+
+/* ---------- Công cụ tạo link (?tool=1) ---------- */
+if (params.get("tool") === "1" || HASH === "tool") {
+  $("tool").hidden = false;
+  const local = location.protocol === "http:" || location.protocol === "https:";
+  let saved = ""; try { saved = localStorage.getItem("inviteBase") || ""; } catch (e) {}
+  $("tBase").value = saved || (local && !/claudeusercontent|claude\.ai/.test(location.host) ? location.origin + location.pathname : "");
+  const mk = name => {
+    const base = $("tBase").value.trim().replace(/#.*$/, "");
+    return name ? `${base}#${nameToHash(name)}` : base;
+  };
+  $("tBase").addEventListener("input", () => { try { localStorage.setItem("inviteBase", $("tBase").value.trim()); } catch (e) {} upd(); });
+  const upd = () => {
+    const u = mk($("tName").value.trim()); $("tOut").value = u; $("tOpen").href = u;
+    $("tBulkOut").value = $("tBulk").value.split("\n").map(s => s.trim()).filter(Boolean).map(n => `${n}: ${mk(n)}`).join("\n");
+  };
+  ["tName", "tBulk"].forEach(id => $(id).addEventListener("input", upd));
+  $("tCopy").addEventListener("click", async () => {
+    try { await navigator.clipboard.writeText($("tOut").value); } catch (e) { $("tOut").select(); try { document.execCommand("copy"); } catch (_) {} }
+    $("tCopy").textContent = "Đã copy ✓"; setTimeout(() => $("tCopy").textContent = "Copy link", 1500);
+  });
+  upd();
+}
+</script>
+</body>
+</html>
